@@ -47,9 +47,11 @@ const (
 // ClientManager is responsible for initializing and creating clients to communicate with
 // kubernetes apiserver on demand
 type ClientManager interface {
-	Client(req *restful.Request, isAdmin bool) (kubernetes.Interface, error)
+	Client(req *restful.Request) (kubernetes.Interface, error)
+	AdminClient(req *restful.Request) (kubernetes.Interface, error)
 	InsecureClient() kubernetes.Interface
-	Config(req *restful.Request, isAdmin bool) (*rest.Config, error)
+	Config(req *restful.Request) (*rest.Config, error)
+	AdminConfig(req *restful.Request) (*rest.Config, error)
 	ClientCmdConfig(req *restful.Request, isAdmin bool) (clientcmd.ClientConfig, error)
 	CSRFKey() string
 	HasAccess(authInfo api.AuthInfo) error
@@ -76,10 +78,24 @@ type clientManager struct {
 	insecureClient kubernetes.Interface
 }
 
-// Client returns kubernetes client that is created based on authentication information extracted
-// from request. If request is nil then authentication will be skipped.
-func (self *clientManager) Client(req *restful.Request, isAdmin bool) (kubernetes.Interface, error) {
-	cfg, err := self.Config(req, isAdmin)
+// Client returns kubernetes client that is created based on authentication information extracted from request
+func (self *clientManager) Client(req *restful.Request) (kubernetes.Interface, error) {
+	cfg, err := self.Config(req)
+	if err != nil {
+		return nil, err
+	}
+
+	client, err := kubernetes.NewForConfig(cfg)
+	if err != nil {
+		return nil, err
+	}
+
+	return client, nil
+}
+
+// Client returns kubernetes client that is created based on authentication information extracted from request
+func (self *clientManager) AdminClient(req *restful.Request) (kubernetes.Interface, error) {
+	cfg, err := self.AdminConfig(req)
 	if err != nil {
 		return nil, err
 	}
@@ -100,8 +116,25 @@ func (self *clientManager) InsecureClient() kubernetes.Interface {
 
 // Config creates rest Config based on authentication information extracted from request.
 // Currently request header is only checked for existence of 'Authentication: BearerToken'
-func (self *clientManager) Config(req *restful.Request, isAdmin bool) (*rest.Config, error) {
-	cmdConfig, err := self.ClientCmdConfig(req, isAdmin)
+// and 'jweToken' in header
+func (self *clientManager) Config(req *restful.Request) (*rest.Config, error) {
+	cmdConfig, err := self.ClientCmdConfig(req, false)
+	if err != nil {
+		return nil, err
+	}
+
+	cfg, err := cmdConfig.ClientConfig()
+	if err != nil {
+		return nil, err
+	}
+
+	self.initConfig(cfg)
+	return cfg, nil
+}
+
+// Config creates rest Config based on admin kuberconfig.
+func (self *clientManager) AdminConfig(req *restful.Request) (*rest.Config, error) {
+	cmdConfig, err := self.ClientCmdConfig(req, true)
 	if err != nil {
 		return nil, err
 	}
@@ -128,7 +161,6 @@ func (self *clientManager) ClientCmdConfig(req *restful.Request, isAdmin bool) (
 		return nil, err
 	}
 
-	// Use auth data provided in cfg if extracted auth info is nil // TODO delete?
 	if authInfo == nil {
 		if isAdmin {
 			defaultAuthInfo := self.buildAuthInfoFromConfig(cfg)
@@ -171,7 +203,7 @@ func (self *clientManager) HasAccess(authInfo api.AuthInfo) error {
 
 // VerberClient returns new verber client based on authentication information extracted from request
 func (self *clientManager) VerberClient(req *restful.Request) (ResourceVerber, error) {
-	client, err := self.Client(req, false)
+	client, err := self.Client(req)
 	if err != nil {
 		return ResourceVerber{}, err
 	}
@@ -317,7 +349,7 @@ func (self *clientManager) initCSRFKey() {
 }
 
 func (self *clientManager) initInsecureClient() {
-	insecureClient, err := self.Client(nil, true)
+	insecureClient, err := self.AdminClient(nil)
 	if err != nil {
 		panic(err)
 	}
