@@ -583,7 +583,7 @@ func CreateHTTPAPIHandler(iManager integration.IntegrationManager, cManager clie
 
 // TODO: Handle case in which RBAC feature is not enabled in API server. Currently returns 404 resource not found
 func (apiHandler *APIHandler) handleGetRbacRoleList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -600,7 +600,7 @@ func (apiHandler *APIHandler) handleGetRbacRoleList(request *restful.Request, re
 
 // TODO: Handle case in which RBAC feature is not enabled in API server. Currently returns 404 resource not found
 func (apiHandler *APIHandler) handleGetRbacRoleBindingList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -616,7 +616,7 @@ func (apiHandler *APIHandler) handleGetRbacRoleBindingList(request *restful.Requ
 }
 
 func (apiHandler *APIHandler) handleRbacStatus(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -637,7 +637,7 @@ func (apiHandler *APIHandler) handleGetCsrfToken(request *restful.Request, respo
 }
 
 func (apiHandler *APIHandler) handleGetStatefulSetList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -656,7 +656,7 @@ func (apiHandler *APIHandler) handleGetStatefulSetList(request *restful.Request,
 }
 
 func (apiHandler *APIHandler) handleGetStatefulSetDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -674,7 +674,7 @@ func (apiHandler *APIHandler) handleGetStatefulSetDetail(request *restful.Reques
 }
 
 func (apiHandler *APIHandler) handleGetStatefulSetPods(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -693,7 +693,7 @@ func (apiHandler *APIHandler) handleGetStatefulSetPods(request *restful.Request,
 }
 
 func (apiHandler *APIHandler) handleGetStatefulSetEvents(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -711,7 +711,7 @@ func (apiHandler *APIHandler) handleGetStatefulSetEvents(request *restful.Reques
 }
 
 func (apiHandler *APIHandler) handleGetServiceList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -728,7 +728,7 @@ func (apiHandler *APIHandler) handleGetServiceList(request *restful.Request, res
 }
 
 func (apiHandler *APIHandler) handleGetServiceEndpoints(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -745,7 +745,7 @@ func (apiHandler *APIHandler) handleGetServiceEndpoints(request *restful.Request
 }
 
 func (apiHandler *APIHandler) handleGetServiceDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -764,7 +764,7 @@ func (apiHandler *APIHandler) handleGetServiceDetail(request *restful.Request, r
 }
 
 func (apiHandler *APIHandler) handleGetIngressDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -781,7 +781,7 @@ func (apiHandler *APIHandler) handleGetIngressDetail(request *restful.Request, r
 }
 
 func (apiHandler *APIHandler) handleGetIngressList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -798,7 +798,7 @@ func (apiHandler *APIHandler) handleGetIngressList(request *restful.Request, res
 }
 
 func (apiHandler *APIHandler) handleGetServicePods(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -817,7 +817,7 @@ func (apiHandler *APIHandler) handleGetServicePods(request *restful.Request, res
 }
 
 func (apiHandler *APIHandler) handleGetNodeList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -834,7 +834,7 @@ func (apiHandler *APIHandler) handleGetNodeList(request *restful.Request, respon
 }
 
 func (apiHandler *APIHandler) handleGetCluster(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -851,7 +851,7 @@ func (apiHandler *APIHandler) handleGetCluster(request *restful.Request, respons
 }
 
 func (apiHandler *APIHandler) handleGetNodeDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -869,7 +869,7 @@ func (apiHandler *APIHandler) handleGetNodeDetail(request *restful.Request, resp
 }
 
 func (apiHandler *APIHandler) handleGetNodeEvents(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -887,7 +887,7 @@ func (apiHandler *APIHandler) handleGetNodeEvents(request *restful.Request, resp
 }
 
 func (apiHandler *APIHandler) handleGetNodePods(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -905,7 +905,7 @@ func (apiHandler *APIHandler) handleGetNodePods(request *restful.Request, respon
 }
 
 func (apiHandler *APIHandler) handleDeploy(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -924,7 +924,7 @@ func (apiHandler *APIHandler) handleDeploy(request *restful.Request, response *r
 }
 
 func (apiHandler *APIHandler) handleScaleResource(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -943,7 +943,7 @@ func (apiHandler *APIHandler) handleScaleResource(request *restful.Request, resp
 }
 
 func (apiHandler *APIHandler) handleGetReplicaCount(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -961,7 +961,7 @@ func (apiHandler *APIHandler) handleGetReplicaCount(request *restful.Request, re
 }
 
 func (apiHandler *APIHandler) handleDeployFromFile(request *restful.Request, response *restful.Response) {
-	cfg, err := apiHandler.cManager.Config(request)
+	cfg, err := apiHandler.cManager.Config(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -992,7 +992,7 @@ func (apiHandler *APIHandler) handleDeployFromFile(request *restful.Request, res
 }
 
 func (apiHandler *APIHandler) handleNameValidity(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1042,7 +1042,7 @@ func (apiHandler *APIHandler) handleGetAvailableProcotols(request *restful.Reque
 }
 
 func (apiHandler *APIHandler) handleGetReplicationControllerList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1060,7 +1060,7 @@ func (apiHandler *APIHandler) handleGetReplicationControllerList(request *restfu
 }
 
 func (apiHandler *APIHandler) handleGetWorkloads(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1078,7 +1078,7 @@ func (apiHandler *APIHandler) handleGetWorkloads(request *restful.Request, respo
 }
 
 func (apiHandler *APIHandler) handleOverview(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1097,7 +1097,7 @@ func (apiHandler *APIHandler) handleOverview(request *restful.Request, response 
 }
 
 func (apiHandler *APIHandler) handleSearch(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1115,7 +1115,7 @@ func (apiHandler *APIHandler) handleSearch(request *restful.Request, response *r
 }
 
 func (apiHandler *APIHandler) handleGetDiscovery(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1132,7 +1132,7 @@ func (apiHandler *APIHandler) handleGetDiscovery(request *restful.Request, respo
 }
 
 func (apiHandler *APIHandler) handleGetConfig(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1149,7 +1149,7 @@ func (apiHandler *APIHandler) handleGetConfig(request *restful.Request, response
 }
 
 func (apiHandler *APIHandler) handleGetReplicaSets(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1167,7 +1167,7 @@ func (apiHandler *APIHandler) handleGetReplicaSets(request *restful.Request, res
 }
 
 func (apiHandler *APIHandler) handleGetReplicaSetDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1186,7 +1186,7 @@ func (apiHandler *APIHandler) handleGetReplicaSetDetail(request *restful.Request
 }
 
 func (apiHandler *APIHandler) handleGetReplicaSetPods(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1206,7 +1206,7 @@ func (apiHandler *APIHandler) handleGetReplicaSetPods(request *restful.Request, 
 }
 
 func (apiHandler *APIHandler) handleGetReplicaSetServices(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1226,7 +1226,7 @@ func (apiHandler *APIHandler) handleGetReplicaSetServices(request *restful.Reque
 }
 
 func (apiHandler *APIHandler) handleGetReplicaSetEvents(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1246,7 +1246,7 @@ func (apiHandler *APIHandler) handleGetReplicaSetEvents(request *restful.Request
 }
 
 func (apiHandler *APIHandler) handleGetPodEvents(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1273,13 +1273,13 @@ func (apiHandler *APIHandler) handleExecShell(request *restful.Request, response
 		return
 	}
 
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
 	}
 
-	cfg, err := apiHandler.cManager.Config(request)
+	cfg, err := apiHandler.cManager.Config(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1295,7 +1295,7 @@ func (apiHandler *APIHandler) handleExecShell(request *restful.Request, response
 }
 
 func (apiHandler *APIHandler) handleGetDeployments(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1313,7 +1313,7 @@ func (apiHandler *APIHandler) handleGetDeployments(request *restful.Request, res
 }
 
 func (apiHandler *APIHandler) handleGetDeploymentDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1331,7 +1331,7 @@ func (apiHandler *APIHandler) handleGetDeploymentDetail(request *restful.Request
 }
 
 func (apiHandler *APIHandler) handleGetDeploymentEvents(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1349,7 +1349,7 @@ func (apiHandler *APIHandler) handleGetDeploymentEvents(request *restful.Request
 }
 
 func (apiHandler *APIHandler) handleGetDeploymentOldReplicaSets(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1368,7 +1368,7 @@ func (apiHandler *APIHandler) handleGetDeploymentOldReplicaSets(request *restful
 }
 
 func (apiHandler *APIHandler) handleGetPods(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1386,7 +1386,7 @@ func (apiHandler *APIHandler) handleGetPods(request *restful.Request, response *
 }
 
 func (apiHandler *APIHandler) handleGetPodDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1403,7 +1403,7 @@ func (apiHandler *APIHandler) handleGetPodDetail(request *restful.Request, respo
 }
 
 func (apiHandler *APIHandler) handleGetReplicationControllerDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1420,7 +1420,7 @@ func (apiHandler *APIHandler) handleGetReplicationControllerDetail(request *rest
 }
 
 func (apiHandler *APIHandler) handleUpdateReplicasCount(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1507,7 +1507,7 @@ func (apiHandler *APIHandler) handleDeleteResource(
 }
 
 func (apiHandler *APIHandler) handleGetReplicationControllerPods(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1526,7 +1526,7 @@ func (apiHandler *APIHandler) handleGetReplicationControllerPods(request *restfu
 }
 
 func (apiHandler *APIHandler) handleCreateNamespace(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1545,7 +1545,7 @@ func (apiHandler *APIHandler) handleCreateNamespace(request *restful.Request, re
 }
 
 func (apiHandler *APIHandler) handleGetNamespaces(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1561,7 +1561,7 @@ func (apiHandler *APIHandler) handleGetNamespaces(request *restful.Request, resp
 }
 
 func (apiHandler *APIHandler) handleGetNamespaceDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1577,7 +1577,7 @@ func (apiHandler *APIHandler) handleGetNamespaceDetail(request *restful.Request,
 }
 
 func (apiHandler *APIHandler) handleGetNamespaceEvents(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1594,7 +1594,7 @@ func (apiHandler *APIHandler) handleGetNamespaceEvents(request *restful.Request,
 }
 
 func (apiHandler *APIHandler) handleCreateImagePullSecret(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1614,7 +1614,7 @@ func (apiHandler *APIHandler) handleCreateImagePullSecret(request *restful.Reque
 }
 
 func (apiHandler *APIHandler) handleGetSecretDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1631,7 +1631,7 @@ func (apiHandler *APIHandler) handleGetSecretDetail(request *restful.Request, re
 }
 
 func (apiHandler *APIHandler) handleGetSecretList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1648,7 +1648,7 @@ func (apiHandler *APIHandler) handleGetSecretList(request *restful.Request, resp
 }
 
 func (apiHandler *APIHandler) handleGetConfigMapList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1665,7 +1665,7 @@ func (apiHandler *APIHandler) handleGetConfigMapList(request *restful.Request, r
 }
 
 func (apiHandler *APIHandler) handleGetConfigMapDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1682,7 +1682,7 @@ func (apiHandler *APIHandler) handleGetConfigMapDetail(request *restful.Request,
 }
 
 func (apiHandler *APIHandler) handleGetPersistentVolumeList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1698,7 +1698,7 @@ func (apiHandler *APIHandler) handleGetPersistentVolumeList(request *restful.Req
 }
 
 func (apiHandler *APIHandler) handleGetThirdPartyResource(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1714,13 +1714,13 @@ func (apiHandler *APIHandler) handleGetThirdPartyResource(request *restful.Reque
 }
 
 func (apiHandler *APIHandler) handleGetThirdPartyResourceDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
 	}
 
-	cfg, err := apiHandler.cManager.Config(request)
+	cfg, err := apiHandler.cManager.Config(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1736,13 +1736,13 @@ func (apiHandler *APIHandler) handleGetThirdPartyResourceDetail(request *restful
 }
 
 func (apiHandler *APIHandler) handleGetThirdPartyResourceObjects(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
 	}
 
-	cfg, err := apiHandler.cManager.Config(request)
+	cfg, err := apiHandler.cManager.Config(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1759,7 +1759,7 @@ func (apiHandler *APIHandler) handleGetThirdPartyResourceObjects(request *restfu
 }
 
 func (apiHandler *APIHandler) handleGetPersistentVolumeDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1775,7 +1775,7 @@ func (apiHandler *APIHandler) handleGetPersistentVolumeDetail(request *restful.R
 }
 
 func (apiHandler *APIHandler) handleGetPersistentVolumeClaimList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1792,7 +1792,7 @@ func (apiHandler *APIHandler) handleGetPersistentVolumeClaimList(request *restfu
 }
 
 func (apiHandler *APIHandler) handleGetPersistentVolumeClaimDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1809,7 +1809,7 @@ func (apiHandler *APIHandler) handleGetPersistentVolumeClaimDetail(request *rest
 }
 
 func (apiHandler *APIHandler) handleGetPodContainers(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1826,7 +1826,7 @@ func (apiHandler *APIHandler) handleGetPodContainers(request *restful.Request, r
 }
 
 func (apiHandler *APIHandler) handleGetReplicationControllerEvents(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1845,7 +1845,7 @@ func (apiHandler *APIHandler) handleGetReplicationControllerEvents(request *rest
 
 func (apiHandler *APIHandler) handleGetReplicationControllerServices(request *restful.Request,
 	response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1875,7 +1875,7 @@ func handleInternalError(response *restful.Response, err error) {
 }
 
 func (apiHandler *APIHandler) handleGetDaemonSetList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1894,7 +1894,7 @@ func (apiHandler *APIHandler) handleGetDaemonSetList(request *restful.Request, r
 
 func (apiHandler *APIHandler) handleGetDaemonSetDetail(
 	request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1911,7 +1911,7 @@ func (apiHandler *APIHandler) handleGetDaemonSetDetail(
 }
 
 func (apiHandler *APIHandler) handleGetDaemonSetPods(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1930,7 +1930,7 @@ func (apiHandler *APIHandler) handleGetDaemonSetPods(request *restful.Request, r
 }
 
 func (apiHandler *APIHandler) handleGetDaemonSetServices(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1948,7 +1948,7 @@ func (apiHandler *APIHandler) handleGetDaemonSetServices(request *restful.Reques
 }
 
 func (apiHandler *APIHandler) handleGetDaemonSetEvents(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1967,7 +1967,7 @@ func (apiHandler *APIHandler) handleGetDaemonSetEvents(request *restful.Request,
 
 func (apiHandler *APIHandler) handleGetHorizontalPodAutoscalerList(request *restful.Request,
 	response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -1983,7 +1983,7 @@ func (apiHandler *APIHandler) handleGetHorizontalPodAutoscalerList(request *rest
 }
 
 func (apiHandler *APIHandler) handleGetHorizontalPodAutoscalerDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -2000,7 +2000,7 @@ func (apiHandler *APIHandler) handleGetHorizontalPodAutoscalerDetail(request *re
 }
 
 func (apiHandler *APIHandler) handleGetJobList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -2018,7 +2018,7 @@ func (apiHandler *APIHandler) handleGetJobList(request *restful.Request, respons
 }
 
 func (apiHandler *APIHandler) handleGetJobDetail(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -2037,7 +2037,7 @@ func (apiHandler *APIHandler) handleGetJobDetail(request *restful.Request, respo
 }
 
 func (apiHandler *APIHandler) handleGetJobPods(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -2056,7 +2056,7 @@ func (apiHandler *APIHandler) handleGetJobPods(request *restful.Request, respons
 }
 
 func (apiHandler *APIHandler) handleGetJobEvents(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -2074,7 +2074,7 @@ func (apiHandler *APIHandler) handleGetJobEvents(request *restful.Request, respo
 }
 
 func (apiHandler *APIHandler) handleGetStorageClassList(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -2090,7 +2090,7 @@ func (apiHandler *APIHandler) handleGetStorageClassList(request *restful.Request
 }
 
 func (apiHandler *APIHandler) handleGetStorageClass(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -2106,7 +2106,7 @@ func (apiHandler *APIHandler) handleGetStorageClass(request *restful.Request, re
 }
 
 func (apiHandler *APIHandler) handleLogSource(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -2124,7 +2124,7 @@ func (apiHandler *APIHandler) handleLogSource(request *restful.Request, response
 }
 
 func (apiHandler *APIHandler) handleLogs(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
@@ -2170,7 +2170,7 @@ func (apiHandler *APIHandler) handleLogs(request *restful.Request, response *res
 }
 
 func (apiHandler *APIHandler) handleLogFile(request *restful.Request, response *restful.Response) {
-	k8sClient, err := apiHandler.cManager.Client(request)
+	k8sClient, err := apiHandler.cManager.Client(request, false)
 	if err != nil {
 		handleInternalError(response, err)
 		return
