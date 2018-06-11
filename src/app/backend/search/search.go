@@ -44,10 +44,10 @@ type SearchResult struct {
 func Search(client kubernetes.Interface, metricClient metricapi.MetricClient, nsQuery *common.NamespaceQuery,
 	dsQuery *dataselect.DataSelectQuery) (*SearchResult, error) {
 
-	clusterResources, err := cluster.GetCluster(client, dsQuery, metricClient)
-	if err != nil {
-		return &SearchResult{}, err
-	}
+	// clusterResources, err := cluster.GetCluster(client, dsQuery, metricClient)
+	// if err != nil {
+	// 	return &SearchResult{}, err
+	// }
 
 	configResources, err := config.GetConfig(client, nsQuery, dsQuery)
 	if err != nil {
@@ -65,13 +65,13 @@ func Search(client kubernetes.Interface, metricClient metricapi.MetricClient, ns
 	}
 
 	return &SearchResult{
-		Cluster: cluster.Cluster{
-			NamespaceList:        clusterResources.NamespaceList,
-			NodeList:             clusterResources.NodeList,
-			PersistentVolumeList: clusterResources.PersistentVolumeList,
-			RoleList:             clusterResources.RoleList,
-			StorageClassList:     clusterResources.StorageClassList,
-		},
+		// Cluster: cluster.Cluster{
+		// 	NamespaceList:        clusterResources.NamespaceList,
+		// 	NodeList:             clusterResources.NodeList,
+		// 	PersistentVolumeList: clusterResources.PersistentVolumeList,
+		// 	RoleList:             clusterResources.RoleList,
+		// 	StorageClassList:     clusterResources.StorageClassList,
+		// },
 
 		Config: config.Config{
 			ConfigMapList:             configResources.ConfigMapList,
@@ -94,7 +94,6 @@ func Search(client kubernetes.Interface, metricClient metricapi.MetricClient, ns
 			StatefulSetList:           workloadsResources.StatefulSetList,
 		},
 
-		Errors: errors.MergeErrors(clusterResources.Errors, configResources.Errors,
-			discoveryResources.Errors, workloadsResources.Errors),
+		Errors: errors.MergeErrors(configResources.Errors, discoveryResources.Errors, workloadsResources.Errors),
 	}, nil
 }
