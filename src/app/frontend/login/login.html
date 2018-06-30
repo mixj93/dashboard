@@ -25,7 +25,7 @@ limitations under the License.
       [[Kubernetes Dashboard|Title shown on login page on login card]]
     </kd-title>
     <kd-content class="kd-content-padded">
-      <kd-login-options on-change="$ctrl.onOptionChange()">
+      <!-- <kd-login-options on-change="$ctrl.onOptionChange()">
         <kd-token-login ng-if="$ctrl.isAuthenticationModeEnabled($ctrl.supportedAuthenticationModes.TOKEN)"
                         title="[[Token|Token option label shown on login page]]"
                         on-update="$ctrl.onUpdate(loginSpec)"></kd-token-login>
@@ -43,6 +43,11 @@ limitations under the License.
       <md-button class="md-primary"
                  ng-click="$ctrl.skip()">
         [[Skip|Text shown on skip button on login page]]
+      </md-button> -->
+
+      <div style="margin: 10px 8px 40px 8px">请登录七牛容器云平台重新进入 Dashboard</div>
+      <md-button class="md-raised md-primary" ng-href="{{$ctrl.currentKePortalAddr}}" target="_blank">
+        前往七牛容器云
       </md-button>
     </kd-content>
   </kd-content-card>

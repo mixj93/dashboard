@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {authRequired} from '../../chrome/state';
-import {stateName as errorState} from '../../error/state';
+// import {stateName as errorState} from '../../error/state';
 import {stateName as loginState} from '../../login/state';
 import {stateName as overviewState} from '../../overview/state';
 
@@ -162,7 +162,7 @@ export class AuthService {
           }
 
           // In following cases user should not be redirected and reach his target state:
-          if (transition.to().name === loginState ||         // User is going to login page.
+          /* if (transition.to().name === loginState ||         // User is going to login page.
               transition.to().name === errorState ||         // User is going to error page.
               !this.isLoginPageEnabled() ||                  // User has chosen to skip login page.
               !this.isAuthenticationEnabled(loginStatus) ||  // Authentication is disabled.
@@ -171,9 +171,10 @@ export class AuthService {
             deferred.resolve(true);
             return;
           }
-
           // In other cases redirect user to login state.
-          deferred.resolve(this.state_.target(loginState));
+          deferred.resolve(this.state_.target(loginState)); */
+          deferred.resolve(true);
+          return;
         },
         (err) => {
           this.log_.error(err);

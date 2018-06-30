@@ -48,12 +48,16 @@ export default function stateConfig($stateProvider) {
  * @param {!angular.$resource} kdOverviewResource
  * @param {!./../chrome/state.StateParams} $stateParams
  * @param {!./../common/dataselect/service.DataSelectService} kdDataSelectService
- * @return {!angular.$q.Promise}
+ * @return {!angular.$q.Promise|Promise}
  * @ngInject
  */
 export function resolveOverview(kdOverviewResource, $stateParams, kdDataSelectService) {
   let query = kdDataSelectService.getDefaultResourceQuery($stateParams.namespace);
-  return kdOverviewResource.get(query).$promise;
+  if ($stateParams.namespace) {
+    return kdOverviewResource.get(query).$promise;
+  } else {
+    return Promise.reject();
+  }
 }
 
 const i18n = {

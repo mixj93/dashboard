@@ -84,8 +84,12 @@ export class ChromeController {
       }, 250);
     });
 
-    this.transitions_.onError({}, this.hideSpinner_.bind(this));
-    this.transitions_.onSuccess({}, this.hideSpinner_.bind(this));
+    this.transitions_.onError({}, () => {
+      this.hideSpinner_();
+    });
+    this.transitions_.onSuccess({}, () => {
+      this.hideSpinner_();
+    });
   }
 
   /**

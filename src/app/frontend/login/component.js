@@ -33,16 +33,19 @@ class LoginController {
   /**
    * @param {!./../chrome/nav/nav_service.NavService} kdNavService
    * @param {!./../common/auth/service.AuthService} kdAuthService
+   * @param {!./../common/utils/service.UtilsService} utilsService
    * @param {!ui.router.$state} $state
    * @param {!angular.$q.Promise} kdAuthenticationModesResource
    * @param {!../common/errorhandling/service.ErrorService} kdErrorService
    * @ngInject
    */
-  constructor(kdNavService, kdAuthService, $state, kdAuthenticationModesResource, kdErrorService) {
+  constructor(kdNavService, kdAuthService, $state, kdAuthenticationModesResource, kdErrorService, utilsService) {
     /** @private {!./../chrome/nav/nav_service.NavService} */
     this.kdNavService_ = kdNavService;
     /** @private {!./../common/auth/service.AuthService} */
     this.kdAuthService_ = kdAuthService;
+    /** @private {!./../common/utils/service.UtilsService} */
+    this.utilsService_ = utilsService;
     /** @private {!ui.router.$state} */
     this.state_ = $state;
     /**
@@ -62,6 +65,8 @@ class LoginController {
     this.supportedAuthenticationModes = Modes;
     /** @private {!../common/errorhandling/service.ErrorService} */
     this.errorService_ = kdErrorService;
+    /** @export {string} */
+    this.currentKePortalAddr;
   }
 
   /** @export */
@@ -81,6 +86,8 @@ class LoginController {
     this.authenticationModesResource_.then((authModes) => {
       this.enabledAuthenticationModes_ = authModes.modes;
     });
+
+    this.currentKePortalAddr = this.utilsService_.getCurrentKePortalAddr();
   }
 
   /**

@@ -57,6 +57,10 @@ import storageClassModule from './storageclass/module';
 import thirdPartyResourceModule from './thirdpartyresource/module';
 import {TitleController} from './title_controller';
 import workloadsModule from './workloads/module';
+import {UtilsService} from './common/utils/service';
+import {AuthService} from './common/auth/service';
+import {NavService} from './chrome/nav/nav_service.js';
+import {stateName as overviewState} from './overview/state';
 
 export default angular
     .module(
@@ -110,4 +114,28 @@ export default angular
     .config(indexConfig)
     .config(routeConfig)
     .controller('kdTitle', TitleController)
-    .controller('kdMain', Controller);
+    .controller('kdMain', Controller)
+    .service('utilsService', UtilsService)
+    .service('authService', AuthService)
+    .service('kdNavService', NavService)
+    .run(['utilsService', 'authService', 'kdNavService', '$state', function(utilsService, authService, kdNavService, $state) {
+        let token = utilsService.getQueryByName('token');
+        let namespace = utilsService.getQueryByName('namespace');
+        if (token) {
+            let loginSpec = {username: '', password: '', token: token, kubeConfig: ''};
+            authService.login(loginSpec)
+            .then((errors) => {
+                if (errors.length > 0) {
+                    // this.errors = errors;
+                    window.location.href = utilsService.getCurrentKePortalAddr();
+                    return;
+                }
+                kdNavService.setVisibility(true);
+                $state.transitionTo(overviewState, {'namespace': namespace});
+            })
+            .catch(() => {
+                // this.errors = [this.errorService_.toBackendApiError(err)];
+                window.location.href = utilsService.getCurrentKePortalAddr();
+            });
+        }
+    }]);

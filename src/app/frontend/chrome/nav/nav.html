@@ -76,7 +76,8 @@ limitations under the License.
                  state="{{::$ctrl.states.secret}}">[[Secrets|Secrets menu entry.]]</kd-nav-item>
   </div>
   <!-- Enabled dynamically if there are third party resources registered in the system. -->
-  <kd-third-party-resource-nav states="$ctrl.states"></kd-third-party-resource-nav>
+  <!-- ! Not used, CRD instead -->
+  <!-- <kd-third-party-resource-nav states="$ctrl.states"></kd-third-party-resource-nav> --> 
   <div class="kd-nav-group">
     <kd-nav-item class="kd-nav-group-item kd-about"
                  state="{{::$ctrl.states.about}}">[[About|About page menu entry.]]</kd-nav-item>
